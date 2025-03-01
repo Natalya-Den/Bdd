@@ -17,18 +17,18 @@ public class TransferPage {
         headTransfer.shouldBe(Condition.visible);
     }
 
-    public void transfer (String amountToTransfer, DataHelper.CardInfo cardInfo) {
+    public void transfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
         amountInput.setValue(amountToTransfer);
         cardNumberFrom.setValue(cardInfo.getCardNumber());
         transferButton.click();
     }
 
-    public DashboardPage makeValidTransfer (String amountToTransfer, DataHelper.CardInfo cardInfo) {
+    public DashboardPage makeValidTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
         transfer(amountToTransfer, cardInfo);
         return new DashboardPage();
     }
 
-    public void  errorMessage (String expectedText) {
+    public void errorMessage(String expectedText) {
         errorMessage.shouldBe(Condition.and("Произошла ошибка", Condition.text(expectedText), Condition.visible));
     }
 

@@ -22,7 +22,7 @@ public class DashboardPage {
         header.shouldBe(visible);
     }
 
-    private SelenideElement getCard (DataHelper.CardInfo cardInfo){
+    private SelenideElement getCard(DataHelper.CardInfo cardInfo) {
         return cards.findBy(Condition.attribute("data-test-id", cardInfo.getTestId()));
     }
 
@@ -38,18 +38,18 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-    public TransferPage selectedCardForTransfer (DataHelper.CardInfo cardInfo) {
+    public TransferPage selectedCardForTransfer(DataHelper.CardInfo cardInfo) {
         getCard(cardInfo).$("button").click();
         return new TransferPage();
     }
 
-    public void reloadDashboardPage(){
+    public void reloadDashboardPage() {
         reloadButton.click();
         header.shouldBe(visible);
 
     }
 
-    public void checkBalance (DataHelper.CardInfo cardInfo, int balanceExpected) {
+    public void checkBalance(DataHelper.CardInfo cardInfo, int balanceExpected) {
         cards.findBy(Condition.attribute("data-test-id", cardInfo.getTestId())).shouldBe(visible)
                 .shouldBe(text(balanceStart + balanceExpected + balanceFinish));
     }

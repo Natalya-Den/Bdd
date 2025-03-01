@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import ru.netology.service.data.DataHelper;
 import ru.netology.service.page.DashboardPage;
 import ru.netology.service.page.LoginPage;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static ru.netology.service.data.DataHelper.*;
 
@@ -40,8 +41,8 @@ public class MoneyTransferTest {
         dashboard.reloadDashboardPage();
         dashboard.checkBalance(firstCardInfo, expectedBalanceFirstCard);
         dashboard.checkBalance(secondCardInfo, expectedBalanceSecondCard);
-        assertAll(()->dashboard.checkBalance(firstCardInfo, expectedBalanceFirstCard),
-                ()->dashboard.checkBalance(secondCardInfo, expectedBalanceSecondCard));
+        assertAll(() -> dashboard.checkBalance(firstCardInfo, expectedBalanceFirstCard),
+                () -> dashboard.checkBalance(secondCardInfo, expectedBalanceSecondCard));
     }
 
     @Test
@@ -54,18 +55,18 @@ public class MoneyTransferTest {
         dashboard.reloadDashboardPage();
         dashboard.checkBalance(firstCardInfo, expectedBalanceFirstCard);
         dashboard.checkBalance(secondCardInfo, expectedBalanceSecondCard);
-        assertAll(()->dashboard.checkBalance(firstCardInfo, expectedBalanceFirstCard),
-                ()->dashboard.checkBalance(secondCardInfo, expectedBalanceSecondCard));
+        assertAll(() -> dashboard.checkBalance(firstCardInfo, expectedBalanceFirstCard),
+                () -> dashboard.checkBalance(secondCardInfo, expectedBalanceSecondCard));
     }
 
     @Test
-    void errorMessageIfAmountMoreBalanceTest(){
+    void errorMessageIfAmountMoreBalanceTest() {
         var amount = generateInvalidAmount(balanceSecondCard);
         var transferPage = dashboard.selectedCardForTransfer(firstCardInfo);
         transferPage.transfer(String.valueOf(amount), secondCardInfo);
         assertAll(() -> transferPage.errorMessage("Выполнена попытка перевода суммы, превышающей остаток на карте списания"),
-                ()-> dashboard.reloadDashboardPage(),
-                ()-> dashboard.checkBalance(firstCardInfo, balanceFirstCard),
-                ()-> dashboard.checkBalance(secondCardInfo, balanceSecondCard));
+                () -> dashboard.reloadDashboardPage(),
+                () -> dashboard.checkBalance(firstCardInfo, balanceFirstCard),
+                () -> dashboard.checkBalance(secondCardInfo, balanceSecondCard));
     }
 }
